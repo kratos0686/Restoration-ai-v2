@@ -1,0 +1,86 @@
+--- ./components/MoistureTrendWidget.tsx
++++ ./components/MoistureTrendWidget.tsx
+@@ -217,21 +217,27 @@
+       {/* Chart Wrapper */}
+       <div className="h-64 w-full">
+-        <ResponsiveContainer width="99%" height="100%">
+-          <LineChart data={chartData} margin={{ top: 10, right: 10, bottom: 5, left: -25 }}>
+-            <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" vertical={false} />
+-            <XAxis dataKey="date" stroke="#64748b" fontSize={10} tickLine={false} axisLine={false} dy={10} />
+-            <YAxis stroke="#64748b" fontSize={10} tickLine={false} axisLine={false} unit="%" />
+-            <Tooltip content={<CustomTooltip />} />
+-            <Legend wrapperStyle={{ fontSize: '10px', paddingTop: '10px' }} iconType="circle" />
+-            
+-            <ReferenceLine y={12} stroke="#10b981" strokeDasharray="4 4" label={{ value: 'Dry Standard (12%)', fill: '#10b981', fontSize: 10, position: 'insideBottomLeft' }} />
+-            <ReferenceArea y1={0} y2={12} fill="#10b981" fillOpacity={0.05} />
+-            <ReferenceArea y1={12} y2={20} fill="#f59e0b" fillOpacity={0.05} />
+-            <ReferenceArea y1={20} y2={100} fill="#ef4444" fillOpacity={0.05} />
+-
+-            {/* Render selected material curve lines */}
+-            {materials.map((mat, i) => {
+-              const isSelected = selectedMaterialIds.includes(mat.id);
+-              if (!isSelected) return null;
+-              
+-              // Generate distinct colors based on index
+-              const colors = ['#0ea5e9', '#8b5cf6', '#f43f5e', '#10b981', '#f59e0b', '#ec4899', '#14b8a6'];
+-              const color = colors[i % colors.length];
+-              
+-              return (
+-                <Line 
+-                  key={mat.id}
+-                  type="monotone" 
+-                  dataKey={mat.name} 
+-                  stroke={color} 
+-                  strokeWidth={3}
+-                  dot={{ r: 4, strokeWidth: 2, fill: '#0f172a' }}
+-                  activeDot={{ r: 6, strokeWidth: 0 }}
+-                  connectNulls
+-                />
+-              );
+-            })}
+-          </LineChart>
+-        </ResponsiveContainer>
++        {chartData.length > 0 ? (
++          <ResponsiveContainer width="99%" height="100%">
++            <LineChart data={chartData} margin={{ top: 10, right: 10, bottom: 5, left: -25 }}>
++              <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" vertical={false} />
++              <XAxis dataKey="date" stroke="#64748b" fontSize={10} tickLine={false} axisLine={false} dy={10} />
++              <YAxis stroke="#64748b" fontSize={10} tickLine={false} axisLine={false} unit="%" />
++              <Tooltip content={<CustomTooltip />} />
++              <Legend wrapperStyle={{ fontSize: '10px', paddingTop: '10px' }} iconType="circle" />
++              
++              <ReferenceLine y={12} stroke="#10b981" strokeDasharray="4 4" label={{ value: 'Dry Standard (12%)', fill: '#10b981', fontSize: 10, position: 'insideBottomLeft' }} />
++              <ReferenceArea y1={0} y2={12} fill="#10b981" fillOpacity={0.05} />
++              <ReferenceArea y1={12} y2={20} fill="#f59e0b" fillOpacity={0.05} />
++              <ReferenceArea y1={20} y2={100} fill="#ef4444" fillOpacity={0.05} />
++
++              {/* Render selected material curve lines */}
++              {materials.map((mat, i) => {
++                const isSelected = selectedMaterialIds.includes(mat.id);
++                if (!isSelected) return null;
++                
++                // Generate distinct colors based on index
++                const colors = ['#0ea5e9', '#8b5cf6', '#f43f5e', '#10b981', '#f59e0b', '#ec4899', '#14b8a6'];
++                const color = colors[i % colors.length];
++                
++                return (
++                  <Line 
++                    key={mat.id}
++                    type="monotone" 
++                    dataKey={mat.name} 
++                    stroke={color} 
++                    strokeWidth={3}
++                    dot={{ r: 4, strokeWidth: 2, fill: '#0f172a' }}
++                    activeDot={{ r: 6, strokeWidth: 0 }}
++                    connectNulls
++                  />
++                );
++              })}
++            </LineChart>
++          </ResponsiveContainer>
++        ) : (
++          <div className="w-full h-full flex items-center justify-center text-slate-500 text-xs bg-white/5 rounded-xl border border-white/5">
++            Not enough data to display chart
++          </div>
++        )}
+       </div>

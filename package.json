@@ -14,7 +14,7 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@genkit-ai/googleai": "^0.5.17",
+    "@genkit-ai/googleai": "^1.28.0",
     "@google-cloud/storage": "^7.21.0",
     "@google/genai": "1.20.0",
     "@react-three/drei": "^10.7.7",
@@ -28,7 +28,7 @@
     "express-rate-limit": "^8.3.2",
     "firebase": "^12.11.0",
     "firebase-admin": "^14.2.0",
-    "genkit": "^0.5.17",
+    "genkit": "^1.40.0",
     "html2canvas": "1.4.1",
     "jspdf": "^4.2.1",
     "jsqr": "^1.4.0",

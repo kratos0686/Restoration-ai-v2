@@ -74,25 +74,31 @@ export const ProjectHealthSummary: React.FC<ProjectHealthSummaryProps> = ({ proj
       </div>
 
       <div className="h-48 w-full mt-2">
-        <ResponsiveContainer width="99%" height="100%">
-          <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
-            <defs>
-              <linearGradient id="colorMoisture" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#0ea5e9" stopOpacity={0.3}/>
-                <stop offset="95%" stopColor="#0ea5e9" stopOpacity={0}/>
-              </linearGradient>
-            </defs>
-            <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" vertical={false} />
-            <XAxis dataKey="date" stroke="#64748b" fontSize={10} tickLine={false} axisLine={false} dy={10} />
-            <YAxis stroke="#64748b" fontSize={10} tickLine={false} axisLine={false} unit="%" />
-            <Tooltip 
-              contentStyle={{ backgroundColor: '#0f172a', borderColor: '#1e293b', borderRadius: '12px', fontSize: '12px' }}
-              itemStyle={{ color: '#0ea5e9', fontWeight: 'bold' }}
-            />
-            <ReferenceLine y={12} stroke="#10b981" strokeDasharray="4 4" label={{ value: 'Dry Standard (12%)', fill: '#10b981', fontSize: 10, position: 'insideBottomLeft' }} />
-            <Area type="monotone" dataKey="avgMoisture" name="Avg MC%" stroke="#0ea5e9" strokeWidth={3} fillOpacity={1} fill="url(#colorMoisture)" activeDot={{ r: 6, fill: '#0ea5e9', stroke: '#fff', strokeWidth: 2 }} />
-          </AreaChart>
-        </ResponsiveContainer>
+        {chartData.length > 0 ? (
+          <ResponsiveContainer width="99%" height="100%">
+            <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
+              <defs>
+                <linearGradient id="colorMoisture" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#0ea5e9" stopOpacity={0.3}/>
+                  <stop offset="95%" stopColor="#0ea5e9" stopOpacity={0}/>
+                </linearGradient>
+              </defs>
+              <CartesianGrid strokeDasharray="3 3" stroke="#ffffff10" vertical={false} />
+              <XAxis dataKey="date" stroke="#64748b" fontSize={10} tickLine={false} axisLine={false} dy={10} />
+              <YAxis stroke="#64748b" fontSize={10} tickLine={false} axisLine={false} unit="%" />
+              <Tooltip 
+                contentStyle={{ backgroundColor: '#0f172a', borderColor: '#1e293b', borderRadius: '12px', fontSize: '12px' }}
+                itemStyle={{ color: '#0ea5e9', fontWeight: 'bold' }}
+              />
+              <ReferenceLine y={12} stroke="#10b981" strokeDasharray="4 4" label={{ value: 'Dry Standard (12%)', fill: '#10b981', fontSize: 10, position: 'insideBottomLeft' }} />
+              <Area type="monotone" dataKey="avgMoisture" name="Avg MC%" stroke="#0ea5e9" strokeWidth={3} fillOpacity={1} fill="url(#colorMoisture)" activeDot={{ r: 6, fill: '#0ea5e9', stroke: '#fff', strokeWidth: 2 }} />
+            </AreaChart>
+          </ResponsiveContainer>
+        ) : (
+          <div className="w-full h-full flex items-center justify-center text-slate-500 text-xs bg-white/5 rounded-xl border border-white/5">
+            Not enough data to display chart
+          </div>
+        )}
       </div>
     </div>
   );

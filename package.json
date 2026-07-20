@@ -14,7 +14,7 @@
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@genkit-ai/googleai": "^0.5.17",
+    "@genkit-ai/googleai": "^1.28.0",
     "@google-cloud/storage": "^5.18.3",
     "@google/genai": "1.20.0",
     "@react-three/drei": "^10.7.7",

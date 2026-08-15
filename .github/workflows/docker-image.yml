@@ -29,6 +29,7 @@ jobs:
       - name: Authenticate to Google Cloud (WIF)
         if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
         id: auth
+        continue-on-error: true
         uses: google-github-actions/auth@v2
         with:
           workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
@@ -36,8 +37,9 @@ jobs:
 
       # ── 3. Fetch GEMINI_API_KEY from GCP Secret Manager ────────────────
       - name: Get Gemini API key from Secret Manager
-        if: ${{ github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository }}
+        if: ${{steps.auth.outcome == 'success' && ( github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) }}
         id: gemini_secret
+        continue-on-error: true
         uses: google-github-actions/get-secretmanager-secrets@v2
         with:
           secrets: |-

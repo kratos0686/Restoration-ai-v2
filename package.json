@@ -22,7 +22,7 @@
     "@tailwindcss/vite": "^4.3.0",
     "@vis.gl/react-google-maps": "^1.8.3",
     "cors": "^2.8.6",
-    "dompurify": "^3.4.3",
+    "dompurify": "^3.4.13",
     "dotenv": "^17.4.1",
     "express": "^5.2.1",
     "express-rate-limit": "^8.3.2",

@@ -62,7 +62,7 @@ jobs:
 
       # Compile and deploy deep learning integration image to Cloud Run
       - name: Build and Push Server Image
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v7
         with:
           context: .
           push: true
